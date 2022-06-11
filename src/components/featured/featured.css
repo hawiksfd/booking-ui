@@ -21,9 +21,15 @@
     object-fit: cover;
 }
 
-.featuredTitle {
+.featuredTitle>h1 {
     position: absolute;
-    bottom: 20px;
+    bottom: 25px;
     left: 20px;
+}
 
+
+.featuredTitle>h2 {
+    position: absolute;
+    bottom: 1px;
+    left: 20px;
 }
