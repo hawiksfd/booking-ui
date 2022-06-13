@@ -12,20 +12,20 @@
     margin: 20px 0px 100px 0px;
 }
 
-.headerContainer.listMode {
-    margin: 20px 0px 0px 0px;
+.headerContainer.listmode {
+    margin: 0px 0px 0px 0px;
 }
 
 .headerList {
     display: flex;
-    gap: 40px;
-    margin: 50px;
+    gap: 50px;
+    margin: 25px 0px 25px 0px;
 }
 
 .headerListItem {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     cursor: pointer;
 }
 
