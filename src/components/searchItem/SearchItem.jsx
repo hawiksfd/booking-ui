@@ -10,8 +10,8 @@ const SearchItem = () => {
                 className="siImg"
             />
             <div className="siDesc">
-                <h2 className="siTitle">Tower Street Apartments</h2>
-                <span className="siDistance">500m from center</span>
+                <h2 className="siTitle">Wana Bucu Villas by Pramana Villas</h2>
+                <span className="siDistance">700m from center</span>
                 <span className="siTaxiOp">Free airport taxi</span>
                 <span className="siSubtitle">Studio apartment with air conditioning</span>
                 <span className="siFeatures">Entire studio · 1 Bathroom · 21m² 1 full bed</span>
