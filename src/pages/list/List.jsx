@@ -6,16 +6,29 @@ import { useLocation } from 'react-router-dom';
 import { format } from "date-fns";
 import { DateRange } from 'react-date-range';
 import SearchItem from '../../components/searchItem/SearchItem';
+import useFetch from '../../hooks/useFetch';
 
 
 const List = () => {
-
     const location = useLocation();
+    // eslint-disable-next-line
     const [destination, setDestination] = useState(location.state.destination);
+    // eslint-disable-next-line
     const [date, setDate] = useState(location.state.date);
+    // eslint-disable-next-line
     const [person, setPerson] = useState(location.state.person);
-
     const [openDate, setOpenDate] = useState(false);
+    const [min, setMin] = useState(undefined);
+    const [max, setMax] = useState(undefined);
+
+    // eslint-disable-next-line
+    const { data, loading, error, reFetch } = useFetch(
+        `/hotel?city=${destination}&min=${min || 0}&max=${max || 9999999}`
+    )
+
+    const handleClick = () => {
+        reFetch()
+    }
 
 
     return (
@@ -57,13 +70,13 @@ const List = () => {
                                         <small> (per night)</small>
                                     </span>
 
-                                    <input type="number" className="lsPersonInput" />
+                                    <input type="number" onChange={e => setMin(e.target.value)} className="lsPersonInput" />
                                 </div>
                                 <div className="lsPersonItem">
                                     <span className="lsPersonText">Max price
                                         <small> (per night)</small>
                                     </span>
-                                    <input type="number" className="lsPersonInput" />
+                                    <input type="number" onChange={e => setMax(e.target.value)} className="lsPersonInput" />
                                 </div>
                                 <div className="lsPersonItem">
                                     <span className="lsPersonText" >Adult</span>
@@ -79,18 +92,17 @@ const List = () => {
                                 </div>
                             </div>
                         </div>
-                        <button>Search</button>
+                        <button onClick={handleClick}>Search</button>
                     </div>
                     <div className="listResult">
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
+                        {loading ? ("Loading please wait") : (
+                            <>
+                                {data.map((item) => (
 
+                                    <SearchItem item={item} key={item._id} />
+                                ))}
+                            </>
+                        )}
                     </div>
 
                 </div>

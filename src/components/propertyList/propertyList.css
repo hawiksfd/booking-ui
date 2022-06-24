@@ -22,6 +22,7 @@
 .pListTitle>h1 {
     font-size: 18px;
     height: 10px;
+    text-transform: capitalize;
 }
 
 .pListTitle>h2 {

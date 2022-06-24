@@ -7,11 +7,11 @@ import List from './pages/list/List';
 function App() {
   return (
     <BrowserRouter>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/hotel" element={<List />} />
         <Route path="/hotel/:id" element={<Hotel />} />
-
       </Routes>
     </BrowserRouter>
   )

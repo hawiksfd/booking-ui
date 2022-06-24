@@ -1,33 +1,37 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './searchItem.css'
 
-const SearchItem = () => {
+const SearchItem = ({ item }) => {
     return (
         <div className='searchItem'>
+
             <img
-                src="https://cf.bstatic.com/xdata/images/hotel/square200/362812460.webp?k=42230c30cf3210e550e73e880fc30d12efaecfb1d1d8b5066724c4ba52341419&o=&s=1"
+                src={item.photos[0]}
                 alt=""
                 className="siImg"
             />
             <div className="siDesc">
-                <h2 className="siTitle">Wana Bucu Villas by Pramana Villas</h2>
-                <span className="siDistance">700m from center</span>
+                <h2 className="siTitle">{item.name}</h2>
+                <span className="siDistance">{item.distance}m from center {item.city}</span>
                 <span className="siTaxiOp">Free airport taxi</span>
                 <span className="siSubtitle">Studio apartment with air conditioning</span>
-                <span className="siFeatures">Entire studio · 1 Bathroom · 21m² 1 full bed</span>
+                <span className="siFeatures">{item.desc}</span>
                 <span className="siCancelOp">Free cancellation</span>
                 <span className="siCancelOpSubtitle">You can cancel later, so look in this great price today!</span>
             </div>
 
             <div className="siDetail">
-                <div className="siRating">
+                {item.rating && <div className="siRating">
                     <span>Excellent</span>
-                    <button>8.9</button>
-                </div>
+                    <button>{item.rating}</button>
+                </div>}
                 <div className="siDetailTexts">
-                    <span className="siPrice">$123</span>
+                    <span className="siPrice">${item.cheapestPrice}</span>
                     <span className="siTaxOp">Include taxes and fees</span>
-                    <button className='siCheckButton'>See details</button>
+                    <Link to={`/hotel/${item._id}`}>
+                        <button className='siCheckButton'>See details</button>
+                    </Link>
                 </div>
             </div>
 

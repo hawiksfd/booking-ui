@@ -8,11 +8,10 @@
 
 .fpItem {
     flex: 1;
-    gap: 10px;
+    gap: 5px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-
 }
 
 .fpImg {
@@ -26,6 +25,7 @@
 
 .fpCity {
     font-weight: 300;
+    text-transform: capitalize;
 }
 
 .fpPrice {

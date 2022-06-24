@@ -23,6 +23,7 @@ const Home = () => {
 
                 <h1 className="homeTitle">Homes guests love</h1>
                 <FeaturedProperties />
+                
                 <MailList />
 
                 <Footer />
