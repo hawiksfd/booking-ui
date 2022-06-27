@@ -14,7 +14,7 @@ const List = () => {
     // eslint-disable-next-line
     const [destination, setDestination] = useState(location.state.destination);
     // eslint-disable-next-line
-    const [date, setDate] = useState(location.state.date);
+    const [dates, setDates] = useState(location.state.dates);
     // eslint-disable-next-line
     const [person, setPerson] = useState(location.state.person);
     const [openDate, setOpenDate] = useState(false);
@@ -23,7 +23,7 @@ const List = () => {
 
     // eslint-disable-next-line
     const { data, loading, error, reFetch } = useFetch(
-        `/hotel?city=${destination}&min=${min || 0}&max=${max || 9999999}`
+        `/hotel?city=${destination}&min=${min - 1 || 0}&max=${max || 9999}`
     )
 
     const handleClick = () => {
@@ -48,15 +48,15 @@ const List = () => {
                             <label>Check-in Date</label>
                             <span onClick={() => setOpenDate(!openDate)} >
                                 {`
-                            ${format(date[0].startDate, "dd/MM/yyyy")} to 
-                            ${format(date[0].endDate, "dd/MM/yyyy")}
+                            ${format(dates[0].startDate, "dd/MM/yyyy")} to 
+                            ${format(dates[0].endDate, "dd/MM/yyyy")}
                             `}
                             </span>
                             {openDate &&
                                 < DateRange
-                                    onChange={(item) => setDate([item.selection])}
+                                    onChange={(item) => setDates([item.selection])}
                                     minDate={new Date()}
-                                    ranges={date}
+                                    ranges={dates}
 
                                 />}
                         </div>

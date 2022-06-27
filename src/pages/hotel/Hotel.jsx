@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './hotel.css'
 import Header from '../../components/header/Header'
 import Navbar from '../../components/navbar/Navbar'
@@ -8,6 +8,7 @@ import MailList from '../../components/mailList/MailList'
 import Footer from '../../components/footer/Footer'
 import { useLocation } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch';
+import { SearchContext } from '../../context/SearchContext'
 
 
 
@@ -18,7 +19,18 @@ const Hotel = () => {
     const [slideNumber, setSlideNumber] = useState(0);
     const [openSlider, setOpenSlider] = useState(false);
     // eslint-disable-next-line
-    const { data, loading, error } = useFetch(`/hotel/${id}`)
+    const { data, loading, error } = useFetch(`/hotel/find/${id}`)
+
+    const { dates, person } = useContext(SearchContext);
+
+    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+    function dayDifference(date1, date2) {
+        const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+        return diffDays;
+    }
+
+    const days = dayDifference(dates[0].endDate, dates[0].startDate);
 
     // eslint-disable-next-line
     const photos = [
@@ -57,6 +69,7 @@ const Hotel = () => {
         }
         setSlideNumber(newSlideNumber)
     }
+
     return (
         <div>
             <Navbar />
@@ -108,13 +121,13 @@ const Hotel = () => {
                                     </p>
                                 </div>
                                 <div className="hotelDetailPrice">
-                                    <h3>Perfect for a 9-night stay!</h3>
+                                    <h3>Perfect for a {days}-night stay!</h3>
                                     <span>
                                         Located in the real heart of Ubud, this property has an
                                         excellent location score of 8.9!
                                     </span>
                                     <h4>
-                                        <b>${data.cheapestPrice}</b> (9 nights)
+                                        <b>${days * data.cheapestPrice * person.room}</b> ({days} nights)
                                     </h4>
                                     <button className='bookNow'>Reserve or Book Now!</button>
                                 </div>
